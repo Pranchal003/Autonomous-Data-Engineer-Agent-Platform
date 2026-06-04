@@ -1,0 +1,35 @@
+{
+  "name": "orders_etl",
+  "description": "Raw to staging orders pipeline",
+  "source": "raw.orders",
+  "target": "staging.orders",
+  "schedule": null,
+  "stages": [
+    {
+      "name": "extract_raw",
+      "sql": null,
+      "transform_type": "extract",
+      "dependencies": [],
+      "config": {}
+    },
+    {
+      "name": "transform_staging",
+      "sql": null,
+      "transform_type": "sql",
+      "dependencies": [
+        "extract_raw"
+      ],
+      "config": {}
+    },
+    {
+      "name": "load_warehouse",
+      "sql": null,
+      "transform_type": "load",
+      "dependencies": [
+        "transform_staging"
+      ],
+      "config": {}
+    }
+  ],
+  "metadata": {}
+}

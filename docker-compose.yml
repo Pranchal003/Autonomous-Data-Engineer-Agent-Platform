@@ -1,0 +1,59 @@
+# ADE Platform Docker Compose Configuration
+version: '3.8'
+
+services:
+  streamlit:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ade-streamlit
+    ports:
+      - "8501:8501"
+    environment:
+      STREAMLIT_SERVER_HEADLESS: "true"
+      STREAMLIT_SERVER_PORT: "8501"
+      STREAMLIT_LOGGER_LEVEL: "info"
+    volumes:
+      - ./frontend:/app/frontend
+      - ./data:/app/data
+      - ./logs:/app/logs
+    depends_on:
+      - api
+
+  api:
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+    container_name: ade-api
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: "postgresql://ade:ade@db:5432/ade_db"
+      LOG_LEVEL: "info"
+      API_HOST: "0.0.0.0"
+      API_PORT: "8000"
+    volumes:
+      - ./src:/app/src
+      - ./logs:/app/logs
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16-alpine
+    container_name: ade-db
+    environment:
+      POSTGRES_USER: "ade"
+      POSTGRES_PASSWORD: "ade"
+      POSTGRES_DB: "ade_db"
+    ports:
+      - "5432:5432"
+    volumes:
+      - ade_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ade"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  ade_db_data:

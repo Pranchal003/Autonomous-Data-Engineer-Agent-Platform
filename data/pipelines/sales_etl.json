@@ -1,0 +1,9 @@
+{
+  "name": "sales_etl",
+  "description": "",
+  "source": "",
+  "target": "",
+  "schedule": null,
+  "stages": [],
+  "metadata": {}
+}

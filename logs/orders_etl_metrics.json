@@ -1,0 +1,24 @@
+{
+  "pipeline": "orders_etl",
+  "recorded_at": "2026-06-04T06:35:03.530880+00:00",
+  "metrics": [
+    {
+      "name": "success_rate",
+      "value": 99.2,
+      "unit": "%",
+      "status": "ok"
+    },
+    {
+      "name": "avg_runtime_min",
+      "value": 4.5,
+      "unit": "min",
+      "status": "ok"
+    },
+    {
+      "name": "data_freshness_hours",
+      "value": 2.1,
+      "unit": "h",
+      "status": "ok"
+    }
+  ]
+}

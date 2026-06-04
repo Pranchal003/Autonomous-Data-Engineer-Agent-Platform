@@ -1,0 +1,21 @@
+{
+  "pipeline": "orders_etl",
+  "checks": [
+    {
+      "name": "not_null_order_id",
+      "type": "not_null",
+      "column": "order_id"
+    },
+    {
+      "name": "positive_amount",
+      "type": "range",
+      "column": "amount",
+      "min": 0
+    },
+    {
+      "name": "freshness",
+      "type": "freshness",
+      "max_hours": 24
+    }
+  ]
+}
