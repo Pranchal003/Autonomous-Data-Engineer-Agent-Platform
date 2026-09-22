@@ -1,8 +1,10 @@
 fastapi
-uvicorn
+uvicorn[standard]
 streamlit
 pandas
 numpy
 sqlalchemy
 python-dotenv
 plotly
+psycopg2-binary
+python-multipart
